@@ -40,6 +40,7 @@ var TodoView = Backbone.View.extend({
     },
     edit: function () {
         this.$el.addClass("editing");
+        this.$(".edit").focus();
     },
     close: function () {
         var name = this.$(".edit").val().trim();
