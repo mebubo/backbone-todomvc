@@ -20,10 +20,14 @@ var TodoView = Backbone.View.extend({
     events: {
         "click .toggle": "toggle",
         "click .destroy": "clear",
-        "dblclick label" : "edit",
-        "keypress .edit": "updateOnEnter"
+        "dblclick label": "edit",
+        "keypress .edit": "updateOnEnter",
+        "blur .edit": "close"
     },
-    clear: function() {
+    initialize: function() {
+        this.listenTo(this.model, 'change', this.render);
+    },
+    clear: function () {
         this.model.destroy();
         this.remove();
     },
@@ -37,13 +41,16 @@ var TodoView = Backbone.View.extend({
     edit: function () {
         this.$el.addClass("editing");
     },
-    updateOnEnter: function(e) {
+    close: function () {
+        var name = this.$(".edit").val().trim();
+        if (name) {
+            this.model.save({name: name});
+        }
+        this.$el.removeClass("editing");
+    },
+    updateOnEnter: function (e) {
         if (e.keyCode == 13) {
-            var name = this.$(".edit").val().trim()
-            if (name) {
-                this.model.save({name: name});
-            }
-            this.$el.removeClass("editing");
+            this.close();
         }
     }
 });
@@ -52,7 +59,6 @@ var AppView = Backbone.View.extend({
     el: "#todo-app",
     initialize: function() {
         this.listenTo(todos, 'reset', this.addAll);
-        this.listenTo(todos, 'change', this.addAll);
         this.listenTo(todos, 'add', this.addOne)
         todos.fetch({reset: true});
     },
