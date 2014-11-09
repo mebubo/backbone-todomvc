@@ -13,7 +13,6 @@ var TodoCollection = Backbone.Collection.extend({
     localStorage: new Backbone.LocalStorage('todos-list')
 })
 
-var item1 = new TodoModel({name: "item1"})
 var todos = new TodoCollection()
 
 var TodoView = Backbone.View.extend({
@@ -56,7 +55,6 @@ var AppView = Backbone.View.extend({
         this.listenTo(todos, 'reset', this.addAll);
         this.listenTo(todos, 'change', this.addAll);
         this.listenTo(todos, 'add', this.addOne)
-        this.listenTo(todos, 'all', this.echo);
         todos.fetch({reset: true});
     },
     events: {
@@ -73,9 +71,6 @@ var AppView = Backbone.View.extend({
             todos.create({name: name.trim()});
         }
         this.$("#add-item").val('')
-    },
-    echo: function(e) {
-        console.log("---", e)
     },
     addOne: function(model) {
         var view = new TodoView({model: model})
