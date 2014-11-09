@@ -57,19 +57,16 @@ var AppView = Backbone.View.extend({
         todos.fetch({reset: true});
     },
     events: {
-        "keypress #add-item": "keypressed"
+        "keypress #add-item": "createOnEnter"
     },
-    keypressed: function(e) {
+    createOnEnter: function(e) {
         if (e.keyCode == 13) {
-            this.createNewItem();
+            var name = this.$("#add-item").val().trim();
+            if (name) {
+                todos.create({name: name});
+            }
+            this.$("#add-item").val('')
         }
-    },
-    createNewItem: function() {
-        var name = this.$("#add-item").val()
-        if (name.trim()) {
-            todos.create({name: name.trim()});
-        }
-        this.$("#add-item").val('')
     },
     addOne: function(model) {
         var view = new TodoView({model: model});
