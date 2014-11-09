@@ -29,7 +29,6 @@ var TodoView = Backbone.View.extend({
     },
     template: _.template($("#item-template").html()),
     render: function() {
-        console.log("render: ", this.model);
         this.$el.html(this.template(this.model.toJSON()))
     },
     toggle: function() {
