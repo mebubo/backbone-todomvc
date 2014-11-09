@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8"/>
     <title>TODO list</title>
+    <link rel="stylesheet" href="css/todo.css"/>
 </head>
 <body>
 
@@ -12,30 +13,29 @@
     <section>
         <header>
             <h1>TODO</h1>
-            <input type="text" placeholder="enter todo item">
+            <input type="text" id="add-item" placeholder="enter todo item" autofocus>
         </header>
         <section>
-            <ul>
-                <li>
-                    <input type="checkbox"> item1
-                    <button>delete</button>
-                </li>
-                <li>
-                    <input type="checkbox"> item2
-                    <button>delete</button>
-                </li>
-                <li>
-                    <input type="checkbox"> item3
-                    <button>delete</button>
-                </li>
-                <li>
-                    <input type="checkbox"> item4
-                    <button>delete</button>
-                </li>
+            <ul id="todo-ul">
             </ul>
         </section>
     </section>
 </div>
-<script src="path/to/backbone.js"/>
+
+<script type="text/template" id="item-template">
+    <div class="view">
+        <input class="toggle" type="checkbox" <%= checked ? 'checked' : '' %>>
+        <label><%= name %></label>
+        <button class="destroy">delete</button>
+    </div>
+    <input type="text" class="edit" value="<%= name %>"/>
+</script>
+
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/underscore/underscore.js"></script>
+<script src="bower_components/backbone/backbone.js"></script>
+<script src="bower_components/backbone.localStorage/backbone.localStorage.js"></script>
+<script src="js/todo.js"></script>
+
 </body>
 </html>
