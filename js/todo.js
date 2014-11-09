@@ -28,13 +28,13 @@ var TodoView = Backbone.View.extend({
         this.remove();
     },
     template: _.template($("#item-template").html()),
-    render: function() {
+    render: function () {
         this.$el.html(this.template(this.model.toJSON()))
     },
-    toggle: function() {
+    toggle: function () {
         this.model.toggle();
     },
-    edit: function() {
+    edit: function () {
         this.$el.addClass("editing");
     },
     updateOnEnter: function(e) {
@@ -46,7 +46,7 @@ var TodoView = Backbone.View.extend({
             this.$el.removeClass("editing");
         }
     }
-})
+});
 
 var AppView = Backbone.View.extend({
     el: "#todo-app",
@@ -72,8 +72,8 @@ var AppView = Backbone.View.extend({
         this.$("#add-item").val('')
     },
     addOne: function(model) {
-        var view = new TodoView({model: model})
-        view.render()
+        var view = new TodoView({model: model});
+        view.render();
         this.$("#todo-ul").append(view.el)
     },
     addAll: function () {
