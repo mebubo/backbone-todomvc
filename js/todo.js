@@ -59,6 +59,7 @@ var TodoView = Backbone.View.extend({
 var AppView = Backbone.View.extend({
     el: "#todo-app",
     initialize: function () {
+        this.$list = this.$("#todo-list");
         this.listenTo(todos, 'reset', this.addAll);
         this.listenTo(todos, 'add', this.addOne);
         todos.fetch({reset: true});
@@ -78,10 +79,10 @@ var AppView = Backbone.View.extend({
     addOne: function (model) {
         var view = new TodoView({model: model});
         view.render();
-        this.$("#todo-ul").append(view.el)
+        this.$list.append(view.el)
     },
     addAll: function () {
-        this.$("#todo-ul").html('');
+        this.$list.html('');
         todos.each(this.addOne, this);
     }
 });
