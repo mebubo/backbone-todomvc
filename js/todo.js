@@ -33,7 +33,8 @@ var TodoView = Backbone.View.extend({
     },
     template: _.template($("#item-template").html()),
     render: function () {
-        this.$el.html(this.template(this.model.toJSON()))
+        this.$el.html(this.template(this.model.toJSON()));
+        this.$el.toggleClass('completed', this.model.get('checked'));
     },
     toggle: function () {
         this.model.toggle();
