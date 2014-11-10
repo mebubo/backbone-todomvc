@@ -2,6 +2,7 @@ var TodoModel = Backbone.Model.extend({
     defaults: {
         checked: false
     },
+    idAttribute: '_id',
     toggle: function () {
         this.set("checked", !this.get("checked"));
         this.save();
@@ -10,7 +11,7 @@ var TodoModel = Backbone.Model.extend({
 
 var TodoCollection = Backbone.Collection.extend({
     model: TodoModel,
-    localStorage: new Backbone.LocalStorage('todos-list')
+    url: '/api/todos'
 });
 
 var todos = new TodoCollection();

@@ -1,0 +1,11 @@
+{
+    "name": "backbone-todomvc",
+    "version": "0.0.1",
+    "description": "TODO list",
+    "dependencies": {
+        "express": "*",
+        "body-parser": "*",
+        "path": "*",
+        "mongoose": "*"
+    }
+}
